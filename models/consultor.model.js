@@ -1,0 +1,32 @@
+const { Schema, model } = require('mongoose');
+
+const ConsultorSchema = Schema({
+    nombre: {
+        type: String,
+        required: true
+    },
+    img: {
+        type: String,
+    },
+    usuario: {
+        type: Schema.Types.ObjectId,
+        ref: 'Usuario',
+        required: true
+    },
+    area: {
+        type: Schema.Types.ObjectId,
+        ref: 'Area',
+        required: true
+    },
+    
+});
+
+
+ConsultorSchema.method('toJSON', function() {
+    const { __v, ...object } = this.toObject();
+    return object;
+})
+
+
+
+module.exports = model( 'Consultor', ConsultorSchema );
